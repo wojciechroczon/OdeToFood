@@ -1,0 +1,66 @@
+﻿@page
+@model OdeToFood.Pages.Restaurants.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Restaurants<h1>
+
+   @*<div>@Model.Message</div>*@
+
+
+   <form method="get">
+       <div class="form-group">
+           <div class="input-group">
+               <input type="search" class="form-control" asp-for="SearchTerm"/>
+               <span class="input-group-append">
+                   <button class="btn btn-danger" >
+                       <i icon="" class="fa fa-search" aria-hidden="true"></i>
+                
+                   </button>
+
+               </span>
+           </div>
+
+       </div>
+   </form>
+
+    <table class="table" style="font-size: small">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Cusine</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.restaurantsList)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Name</td>
+                    <td>@item.Location</td>
+                    <td>@item.Cuisine</td>
+                    <td>
+                        <a class="btn btn-lg"
+                           asp-page="./Detail"
+                           asp-route-restaurantId="@item.Id">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
+                        <a class="btn btn-lg"
+                           asp-page="./Edit"
+                           asp-route-restaurantId="@item.Id">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+<a asp-page=".\Edit" class="btn btn-primary">Add New</a>
